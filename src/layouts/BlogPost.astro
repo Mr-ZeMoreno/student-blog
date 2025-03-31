@@ -5,10 +5,33 @@ import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import FormattedDate from "../components/FormattedDate.astro";
 
-type Props = CollectionEntry<"libros">["data"];
+type X = CollectionEntry<"biblioteca">["data"];
 
-const { title, description, pubDate, updatedDate, heroImage, nav } =
+interface Props extends X {
+  baseURL: string;
+}
+
+const { title, description, pubDate, updatedDate, heroImage, nav, baseURL } =
   Astro.props;
+
+const nextUrl = (
+  baseURL +
+  nav?.next
+    ?.replaceAll(".", "")
+    .replaceAll(",", "")
+    .replaceAll("!", "")
+    .replaceAll(" ", "-")
+).toLowerCase();
+const backUrl = (
+  baseURL +
+  nav?.back
+    ?.replaceAll(".", "")
+    .replaceAll(",", "")
+    .replaceAll("!", "")
+    .replaceAll(" ", "-")
+).toLowerCase();
+
+console.log(nextUrl, backUrl);
 ---
 
 <html lang="es">
@@ -85,14 +108,14 @@ const { title, description, pubDate, updatedDate, heroImage, nav } =
           <nav>
             {
               nav?.back && (
-                <a id="back" href={"/" + nav.back}>
+                <a id="back" href={backUrl}>
                   <span>{nav.back}</span>
                 </a>
               )
             }
             {
               nav?.next && (
-                <a id="next" href={"/" + nav.next}>
+                <a id="next" href={nextUrl}>
                   <span>{nav.next}</span>
                 </a>
               )

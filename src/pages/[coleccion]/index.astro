@@ -1,0 +1,26 @@
+---
+import {
+  type CollectionEntry,
+  type CollectionKey,
+  getCollection,
+} from "astro:content";
+import BlogPost from "../../layouts/BlogPost.astro";
+import { render } from "astro:content";
+
+interface Props {
+  coleccion: CollectionKey;
+}
+
+const { coleccion } = Astro.params;
+
+let posts = await getCollection(coleccion);
+posts = posts.filter((post) => post.id.includes("index"));
+
+const { Content } = await render(posts[0]);
+
+const baseURL = `/${coleccion}/`;
+---
+
+<BlogPost {...posts[0].data} baseURL={baseURL}>
+  <Content />
+</BlogPost>

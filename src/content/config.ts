@@ -1,5 +1,11 @@
 import { glob } from "astro/loaders";
 import { defineCollection, z } from "astro:content";
+import { string } from "astro:schema";
+
+const navSchema = z.object({
+  next: z.string().optional(),
+  back: z.string().optional(),
+});
 
 const collectionSchema = z.object({
   title: z.string(),
@@ -7,16 +13,11 @@ const collectionSchema = z.object({
   pubDate: z.coerce.date(),
   updatedDate: z.coerce.date().optional(),
   heroImage: z.string().optional(),
-  nav: z
-    .object({
-      next: z.string().optional(),
-      back: z.string().optional(),
-    })
-    .optional(),
+  nav: navSchema.optional(),
 });
 
-const libros = defineCollection({
-  loader: glob({ base: "./src/content/libros", pattern: "**/*.{md,mdx}" }),
+const biblioteca = defineCollection({
+  loader: glob({ base: "./src/content/biblioteca", pattern: "**/*.{md,mdx}" }),
   schema: collectionSchema,
 });
 
@@ -37,7 +38,7 @@ const colecciones = defineCollection({
 });
 
 export const collections = {
-  libros,
+  biblioteca,
   asignaturas,
   colecciones,
 };

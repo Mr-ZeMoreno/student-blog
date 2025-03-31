@@ -2,7 +2,6 @@
 import BaseHead from "../components/BaseHead.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
-import FormattedDate from "../components/FormattedDate.astro";
 import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
 import ListaColeccion from "../components/ListaColeccion.astro";
 
@@ -15,11 +14,10 @@ type Props = {
       heroImage?: string;
     };
   }[];
+  baseURL: string;
 };
 
-let { posts } = Astro.props as Props;
-
-posts = posts.filter((post) => post.id.includes("index"));
+let { posts, baseURL } = Astro.props as Props;
 ---
 
 <!doctype html>
@@ -60,7 +58,7 @@ posts = posts.filter((post) => post.id.includes("index"));
     <Header />
     <main>
       <section>
-        <ListaColeccion posts={posts} />
+        <ListaColeccion posts={posts} baseURL={baseURL} />
       </section>
     </main>
     <Footer />

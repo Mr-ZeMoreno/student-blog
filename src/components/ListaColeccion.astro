@@ -12,16 +12,17 @@ interface Props {
       heroImage?: string;
     };
   }[];
+  baseURL: string;
 }
 
-let { coleccion, posts } = Astro.props;
+let { coleccion, posts, baseURL } = Astro.props;
 
 if (coleccion) {
   posts = (await getCollection(coleccion)).sort(
     (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
   );
 
-  posts = posts.filter((post) => !post.id.includes("index"));
+  posts = posts.filter((post) => post.id.includes("main"));
 }
 ---
 
@@ -30,7 +31,7 @@ if (coleccion) {
     <ul>
       {posts.map((post) => (
         <li>
-          <a href={post.id}>
+          <a href={baseURL + post.id}>
             <img width={720} height={360} src={post.data.heroImage} alt="" />
             <h4 class="title">{post.data.title}</h4>
             <p class="date">

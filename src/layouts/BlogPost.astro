@@ -5,9 +5,10 @@ import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import FormattedDate from "../components/FormattedDate.astro";
 
-type Props = CollectionEntry<"blog">["data"];
+type Props = CollectionEntry<"libros">["data"];
 
-const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
+const { title, description, pubDate, updatedDate, heroImage, nav } =
+  Astro.props;
 ---
 
 <html lang="es">
@@ -81,9 +82,47 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
             <hr />
           </div>
           <slot />
+          <nav>
+            {
+              nav?.back && (
+                <a id="back" href={"/" + nav.back}>
+                  <span>{nav.back}</span>
+                </a>
+              )
+            }
+            {
+              nav?.next && (
+                <a id="next" href={"/" + nav.next}>
+                  <span>{nav.next}</span>
+                </a>
+              )
+            }
+          </nav>
         </div>
       </article>
     </main>
     <Footer />
   </body>
 </html>
+
+<style>
+  a {
+    color: black;
+    font-weight: bold;
+    width: 100%;
+    display: flex;
+  }
+  nav {
+    display: grid;
+    grid-template-areas: "back next";
+    grid-template-columns: 1fr 1fr;
+  }
+  #next {
+    grid-area: next;
+    justify-content: end;
+  }
+  #back {
+    grid-area: back;
+    justify-content: start;
+  }
+</style>

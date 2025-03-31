@@ -1,11 +1,13 @@
 ---
+import { GITHUB_SITE } from "../consts";
+
 const today = new Date();
 ---
 
 <footer>
   &copy; {today.getFullYear()} Mr-ZeMoreno. All rights reserved.
   <div class="social-links">
-    <a href="https://github.com/Mr-ZeMoreno/" target="_blank">
+    <a href={GITHUB_SITE} target="_blank">
       <span class="sr-only">Ir a Github de Mr-ZeMoreno</span>
       <svg
         viewBox="0 0 16 16"

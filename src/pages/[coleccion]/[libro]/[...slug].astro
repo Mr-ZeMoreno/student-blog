@@ -2,6 +2,7 @@
 import { getCollection } from "astro:content";
 import { render } from "astro:content";
 import BlogPost from "../../../layouts/BlogPost.astro";
+import Avisos from "../../../components/Avisos.astro";
 
 const { coleccion, libro, slug } = Astro.params;
 
@@ -15,5 +16,6 @@ const baseURL = `/${coleccion}/${libro}/`;
 ---
 
 <BlogPost {...post.data} baseURL={baseURL}>
+  {post.data.construccion && <Avisos slot="avisos" />}
   <Content />
 </BlogPost>

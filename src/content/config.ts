@@ -14,6 +14,8 @@ const collectionSchema = z.object({
   updatedDate: z.coerce.date().optional(),
   heroImage: z.string().optional(),
   nav: navSchema.optional(),
+  construccion: z.boolean().optional(),
+  isMath: z.boolean().optional(),
 });
 
 const biblioteca = defineCollection({

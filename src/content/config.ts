@@ -1,23 +1,23 @@
-import { glob } from "astro/loaders";
-import { defineCollection, z } from "astro:content";
+import { glob } from 'astro/loaders'
+import { defineCollection, z } from 'astro:content'
 
 function getRandomInt(min: number, max: number): number {
-  const minCeiled = Math.ceil(min);
-  const maxFloored = Math.floor(max);
-  return Math.floor(Math.random() * (maxFloored - minCeiled) + minCeiled);
+  const minCeiled = Math.ceil(min)
+  const maxFloored = Math.floor(max)
+  return Math.floor(Math.random() * (maxFloored - minCeiled) + minCeiled)
 }
 
 function transformHeroImage(heroImage: string | undefined): string {
   if (!heroImage) {
-    return `/blog-placeholder-${getRandomInt(2, 6)}.jpg`;
+    return `/blog-placeholder-${getRandomInt(2, 6)}.jpg`
   }
-  return heroImage || "";
+  return heroImage || ''
 }
 
 const navSchema = z.object({
   next: z.string().optional(),
   back: z.string().optional(),
-});
+})
 
 const collectionSchema = z
   .object({
@@ -34,32 +34,32 @@ const collectionSchema = z
     return {
       ...data,
       heroImage: transformHeroImage(data.heroImage),
-    };
-  });
+    }
+  })
 
 const biblioteca = defineCollection({
-  loader: glob({ base: "./src/content/biblioteca", pattern: "**/*.{md,mdx}" }),
+  loader: glob({ base: './src/content/biblioteca', pattern: '**/*.{md,mdx}' }),
   schema: collectionSchema,
-});
+})
 
 const asignaturas = defineCollection({
   loader: glob({
-    base: "./src/content/asignaturas",
-    pattern: "**/*.{md,mdx}",
+    base: './src/content/asignaturas',
+    pattern: '**/*.{md,mdx}',
   }),
   schema: collectionSchema,
-});
+})
 
 const colecciones = defineCollection({
   loader: glob({
-    base: "./src/content/",
-    pattern: "**/index.{md,mdx}",
+    base: './src/content/',
+    pattern: '**/index.{md,mdx}',
   }),
   schema: collectionSchema,
-});
+})
 
 export const collections = {
   biblioteca,
   asignaturas,
   colecciones,
-};
+}

@@ -1,28 +1,25 @@
 ---
-import { type AnyEntryMap, getCollection } from "astro:content";
-import BlogPost from "../../layouts/Blog/BlogPost.astro";
-import { render } from "astro:content";
-import { collections } from "../../content/config";
+import { type AnyEntryMap, getCollection } from 'astro:content'
+import BlogPost from '../../layouts/Blog/BlogPost.astro'
+import { render } from 'astro:content'
+import { collections } from '../../content/config'
 
 interface Props {
-  coleccion: keyof typeof collections;
+  coleccion: keyof typeof collections
 }
 
-const coleccion = Astro.params.coleccion as keyof typeof collections;
+const coleccion = Astro.params.coleccion as keyof typeof collections
 
-if (
-  !coleccion ||
-  !Object.prototype.hasOwnProperty.call(collections, coleccion)
-) {
-  return Astro.redirect("/404");
+if (!coleccion || !Object.prototype.hasOwnProperty.call(collections, coleccion)) {
+  return Astro.redirect('/404')
 }
 
-let posts = await getCollection(coleccion);
-posts = posts.filter((post) => post.id.includes("index"));
+let posts = await getCollection(coleccion)
+posts = posts.filter((post) => post.id.includes('index'))
 
-const { Content } = await render(posts[0]);
+const { Content } = await render(posts[0])
 
-const baseURL = `/${coleccion}/`;
+const baseURL = `/${coleccion}/`
 ---
 
 <BlogPost {...posts[0].data} baseURL={baseURL}>

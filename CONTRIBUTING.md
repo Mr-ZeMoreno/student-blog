@@ -45,12 +45,12 @@ Cada asignatura o libro tiene su propia carpeta dentro de `content/`.
 
 ```md
 ---
-title: "Matrices - Clase 1"
-description: "Una colección de asignaturas"
-pubDate: "Marzo 30 2025"
-updatedDate: "Abril 01 2025"
-heroImage: "/blog-placeholder-3.jpg"
-nav: { back: "main", next: "Matrices - Clase 2" }
+title: 'Matrices - Clase 1'
+description: 'Una colección de asignaturas'
+pubDate: 'Marzo 30 2025'
+updatedDate: 'Abril 01 2025'
+heroImage: '/blog-placeholder-3.jpg'
+nav: { back: 'main', next: 'Matrices - Clase 2' }
 construccion: true
 isMath: true
 ---

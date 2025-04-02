@@ -1,28 +1,28 @@
 ---
-import { getCollection, type DataEntryMap } from "astro:content";
-import FormattedDate from "./FormattedDate.astro";
+import { getCollection, type DataEntryMap } from 'astro:content'
+import FormattedDate from './FormattedDate.astro'
 
 interface Props {
-  coleccion?: keyof DataEntryMap;
+  coleccion?: keyof DataEntryMap
   posts?: {
-    id: string;
+    id: string
     data: {
-      title: string;
-      pubDate: string | Date;
-      heroImage?: string;
-    };
-  }[];
-  baseURL: string;
+      title: string
+      pubDate: string | Date
+      heroImage?: string
+    }
+  }[]
+  baseURL: string
 }
 
-let { coleccion, posts, baseURL } = Astro.props;
+let { coleccion, posts, baseURL } = Astro.props
 
 if (coleccion) {
   posts = (await getCollection(coleccion)).sort(
-    (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
-  );
+    (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+  )
 
-  posts = posts.filter((post) => post.id.includes("main"));
+  posts = posts.filter((post) => post.id.includes('main'))
 }
 ---
 
@@ -44,11 +44,7 @@ if (coleccion) {
   )
 }
 
-{
-  !posts && posts!.length === 0 && (
-    <p>No posts available for this collection.</p>
-  )
-}
+{!posts && posts!.length === 0 && <p>No posts available for this collection.</p>}
 
 <style>
   ul {

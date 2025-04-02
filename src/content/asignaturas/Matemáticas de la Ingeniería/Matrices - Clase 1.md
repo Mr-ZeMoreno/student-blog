@@ -1,7 +1,7 @@
 ---
-title: "Matrices - Clase 1"
-description: "Una colección de asignaturas"
-pubDate: "Marzo 30 2025"
+title: 'Matrices - Clase 1'
+description: 'Una colección de asignaturas'
+pubDate: 'Marzo 30 2025'
 construccion: true
 isMath: true
 ---

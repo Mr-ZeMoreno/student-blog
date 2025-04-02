@@ -7,7 +7,8 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "formar": "npx prettier . --write"
+    "format": "npx prettier . --write",
+    "lint": "npx eslint .astro . --fix"
   },
   "dependencies": {
     "@astrojs/mdx": "^4.2.2",

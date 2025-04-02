@@ -1,30 +1,29 @@
 ---
-import GlobalStyle from "../../styles/GlobalStyle.astro";
-import type { CollectionEntry } from "astro:content";
-import BaseHead from "../../components/BaseHead.astro";
-import Header from "../../components/Header.astro";
-import Footer from "../../components/Footer.astro";
-import FormattedDate from "../../components/FormattedDate.astro";
-import MathHead from "../../components/MathHead.astro";
-import BlogStyle from "../../styles/BlogStyle.astro";
-import MathStyle from "../../styles/MathStyle.astro";
+import GlobalStyle from '../../styles/GlobalStyle.astro'
+import type { CollectionEntry } from 'astro:content'
+import BaseHead from '../../components/BaseHead.astro'
+import Header from '../../components/Header.astro'
+import Footer from '../../components/Footer.astro'
+import FormattedDate from '../../components/FormattedDate.astro'
+import MathHead from '../../components/MathHead.astro'
+import BlogStyle from '../../styles/BlogStyle.astro'
+import MathStyle from '../../styles/MathStyle.astro'
 
-type X = CollectionEntry<"biblioteca">["data"];
+type X = CollectionEntry<'biblioteca'>['data']
 
 interface Props extends X {
-  baseURL: string;
+  baseURL: string
 }
 
-const { title, description, pubDate, updatedDate, nav, baseURL, isMath } =
-  Astro.props;
+const { title, description, pubDate, updatedDate, nav, baseURL, isMath } = Astro.props
 
-let { heroImage } = Astro.props;
+let { heroImage } = Astro.props
 
 const cleanUrl = (url: string | undefined) =>
-  url?.replaceAll(/[.,!]/g, "").replaceAll(" ", "-").toLowerCase() ?? "";
+  url?.replaceAll(/[.,!]/g, '').replaceAll(' ', '-').toLowerCase() ?? ''
 
-const nextUrl = baseURL + cleanUrl(nav?.next);
-const backUrl = baseURL + cleanUrl(nav?.back);
+const nextUrl = baseURL + cleanUrl(nav?.next)
+const backUrl = baseURL + cleanUrl(nav?.back)
 ---
 
 <html lang="es">
@@ -53,7 +52,7 @@ const backUrl = baseURL + cleanUrl(nav?.back);
       }
       nav {
         display: grid;
-        grid-template-areas: "back next";
+        grid-template-areas: 'back next';
         grid-template-columns: 1fr 1fr;
       }
       #next {
@@ -110,11 +109,7 @@ const backUrl = baseURL + cleanUrl(nav?.back);
     <main>
       <article>
         <div class="hero-image">
-          {
-            heroImage && (
-              <img width={1020} height={510} src={heroImage} alt="" />
-            )
-          }
+          {heroImage && <img width={1020} height={510} src={heroImage} alt="" />}
         </div>
         <div class="prose">
           <div class="title">

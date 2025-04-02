@@ -1,6 +1,9 @@
 ---
 import HeaderLink from "./HeaderLink.astro";
 import { GITHUB_SITE, SITE_TITLE } from "../consts";
+import { collections } from "../content/config";
+
+const hijos = Object.keys(collections);
 ---
 
 <header>
@@ -8,7 +11,7 @@ import { GITHUB_SITE, SITE_TITLE } from "../consts";
     <h2><a href="/">{SITE_TITLE}</a></h2>
     <div class="internal-links">
       <HeaderLink href="/">Inicio</HeaderLink>
-      <HeaderLink href="/colecciones">Colecciones</HeaderLink>
+      <HeaderLink href="/colecciones" hijos={hijos}>Colecciones</HeaderLink>
       <HeaderLink href="/about">Sobre el proyecto</HeaderLink>
     </div>
     <div class="social-links">

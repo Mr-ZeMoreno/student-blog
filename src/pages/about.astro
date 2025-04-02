@@ -1,10 +1,36 @@
 ---
-import Layout from "../layouts/BlogPost.astro";
+import Layout from "../layouts/Layout.astro";
 ---
 
 <Layout
-  title="About Me"
-  description="Lorem ipsum dolor sit amet"
-  pubDate={new Date("August 08 2021")}
+  title="Sobre el proyecto"
+  description="Un espacio para compartir apuntes universitarios de manera organizada y accesible"
   heroImage="/blog-placeholder-about.jpg"
-/>
+>
+  <h1 slot="title">Sobre el proyecto</h1>
+  <p>
+    *student-blog* nació con el propósito de facilitar el acceso a apuntes
+    universitarios de manera sencilla y organizada. Aquí podrás encontrar
+    resúmenes de clases, extractos de libros, resoluciones de guías y mucho más,
+    todo presentado en formatos cortos y estructurados para facilitar su lectura
+    y comprensión.
+  </p>
+  <p>
+    Este proyecto es totalmente desinteresado y sin fines comerciales. Nuestro
+    único objetivo es ayudar a estudiantes a acceder a material útil para sus
+    estudios de forma fácil y rápida. Es importante mencionar que *student-blog*
+    es un "side project", lo que significa que no siempre tendremos todas las
+    asignaturas o apuntes disponibles. Si deseas contribuir con tus propios
+    apuntes, te invitamos a revisar nuestras pautas en <a
+      href="https://github.com/Mr-ZeMoreno/student-blog/blob/main/CONTRIBUTING.md"
+      target="_blank"
+      rel="noopener noreferrer">el repositorio del proyecto</a
+    >.
+  </p>
+  <p>
+    Queremos que el aprendizaje sea más accesible, organizado y al alcance de
+    todos. Si encuentras que nuestros apuntes te son útiles, ¡te animamos a
+    compartirlos con otros! Recuerda, el conocimiento crece cuando se comparte.
+    🚀📚
+  </p>
+</Layout>

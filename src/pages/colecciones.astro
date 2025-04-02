@@ -1,0 +1,13 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "../layouts/Layout.astro";
+import ListaColeccion from "../components/ListaColeccion.astro";
+
+const posts = (await getCollection("colecciones")).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+---
+
+<Layout>
+  <ListaColeccion posts={posts} baseURL="/" />
+</Layout>

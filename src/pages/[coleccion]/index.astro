@@ -1,17 +1,21 @@
 ---
-import {
-  type CollectionEntry,
-  type CollectionKey,
-  getCollection,
-} from "astro:content";
-import BlogPost from "../../layouts/BlogPost.astro";
+import { type AnyEntryMap, getCollection } from "astro:content";
+import BlogPost from "../../layouts/Blog/BlogPost.astro";
 import { render } from "astro:content";
+import { collections } from "../../content/config";
 
 interface Props {
-  coleccion: CollectionKey;
+  coleccion: keyof typeof collections;
 }
 
-const { coleccion } = Astro.params;
+const coleccion = Astro.params.coleccion as keyof typeof collections;
+
+if (
+  !coleccion ||
+  !Object.prototype.hasOwnProperty.call(collections, coleccion)
+) {
+  return Astro.redirect("/404");
+}
 
 let posts = await getCollection(coleccion);
 posts = posts.filter((post) => post.id.includes("index"));
@@ -23,4 +27,4 @@ const baseURL = `/${coleccion}/`;
 
 <BlogPost {...posts[0].data} baseURL={baseURL}>
   <Content />
-</BlogPost>
+</BlogPost>;

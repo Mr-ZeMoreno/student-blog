@@ -1,0 +1,36 @@
+---
+import { getCollection } from "astro:content";
+import { render } from "astro:content";
+import BlogPost from "../../../layouts/Blog/BlogPost.astro";
+import Avisos from "../../../components/Avisos.astro";
+import { collections } from "../../../content/config";
+
+const coleccion = Astro.params.coleccion as keyof typeof collections;
+const { apunte, slug } = Astro.params;
+
+if (
+  !coleccion ||
+  !Object.prototype.hasOwnProperty.call(collections, coleccion)
+) {
+  return Astro.redirect("/404");
+}
+
+let posts = await getCollection(coleccion);
+
+let post = posts.find((post) => {
+  let idParts = post.id.split("/");
+  return idParts.length > 1 && idParts[0] === apunte && idParts[1] === slug;
+});
+
+if (!post) {
+  return Astro.redirect("/404");
+}
+
+const { Content } = await render(post);
+const baseURL = `/${coleccion}/${apunte}/`;
+---
+
+<BlogPost {...post.data} baseURL={baseURL}>
+  {post.data.construccion && <Avisos slot="avisos" />}
+  <Content />
+</BlogPost>

@@ -1,8 +1,12 @@
 ---
-import { type AnyEntryMap, getCollection } from 'astro:content'
-import BlogPost from '../../layouts/Blog/BlogPost.astro'
+import { getCollection } from 'astro:content'
 import { render } from 'astro:content'
 import { collections } from '../../content/config'
+import Layout from '../../layouts/Layout.astro'
+import Avisos from '../../components/Avisos.astro'
+import Title from '../../components/Layout/Title.astro'
+import FormattedDate from '../../components/FormattedDate.astro'
+import { pick } from '../../lib/utils'
 
 interface Props {
   coleccion: keyof typeof collections
@@ -14,14 +18,24 @@ if (!coleccion || !Object.prototype.hasOwnProperty.call(collections, coleccion))
   return Astro.redirect('/404')
 }
 
-let posts = await getCollection(coleccion)
-posts = posts.filter((post) => post.id.includes('index'))
+const posts = await getCollection(coleccion)
+const post = posts.filter((post) => post.id.includes('index'))[0]
 
-const { Content } = await render(posts[0])
+if (!post) {
+  return Astro.redirect('/404')
+}
 
-const baseURL = `/${coleccion}/`
+const layoutData = pick(post.data, ['title', 'description', 'heroImage', 'isMath'])
+const dateData = pick(post.data, ['pubDate', 'updatedDate'])
+
+const { Content } = await render(post)
 ---
 
-<BlogPost {...posts[0].data} baseURL={baseURL}>
+<Layout {...layoutData}>
+  {post.data.construccion && <Avisos slot="avisos" />}
+  <Title slot="title">
+    <FormattedDate {...dateData} />
+    {post.data.title}
+  </Title>
   <Content />
-</BlogPost>;
+</Layout>

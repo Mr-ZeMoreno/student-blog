@@ -1,21 +1,31 @@
 ---
 import { getCollection } from 'astro:content'
 import { render } from 'astro:content'
-import BlogPost from '../../../layouts/Blog/BlogPost.astro'
 import Avisos from '../../../components/Avisos.astro'
 import { collections } from '../../../content/config'
+import Layout from '../../../layouts/Layout.astro'
+import FormattedDate from '../../../components/FormattedDate.astro'
+import Title from '../../../components/Layout/Title.astro'
+import Nav from '../../../components/Blog/Nav.astro'
+import { pick } from '../../../lib/utils'
 
-const coleccion = Astro.params.coleccion as keyof typeof collections
-const { apunte, slug } = Astro.params
+type CollectionKey = keyof typeof collections
+type PostParams = {
+  coleccion?: string
+  apunte?: string
+  slug?: string
+}
 
-if (!coleccion || !Object.prototype.hasOwnProperty.call(collections, coleccion)) {
+const { coleccion, apunte, slug } = Astro.params as PostParams
+
+if (!coleccion || !(coleccion in collections)) {
   return Astro.redirect('/404')
 }
 
-let posts = await getCollection(coleccion)
+const posts = await getCollection(coleccion as CollectionKey)
 
-let post = posts.find((post) => {
-  let idParts = post.id.split('/')
+const post = posts.find((post) => {
+  const idParts = post.id.split('/')
   return idParts.length > 1 && idParts[0] === apunte && idParts[1] === slug
 })
 
@@ -23,11 +33,21 @@ if (!post) {
   return Astro.redirect('/404')
 }
 
+const layoutData = pick(post.data, ['title', 'description', 'heroImage', 'isMath'])
+const dateData = pick(post.data, ['pubDate', 'updatedDate'])
+const navData = { ...(post.data.nav || {}), coleccion, apunte }
 const { Content } = await render(post)
-const baseURL = `/${coleccion}/${apunte}/`
 ---
 
-<BlogPost {...post.data} baseURL={baseURL}>
+<Layout {...layoutData}>
   {post.data.construccion && <Avisos slot="avisos" />}
+
+  <Title slot="title">
+    <FormattedDate {...dateData} />
+    {post.data.title}
+  </Title>
+
   <Content />
-</BlogPost>
+
+  <Nav {...navData} slot="nav" />
+</Layout>

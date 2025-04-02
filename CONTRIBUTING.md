@@ -8,7 +8,7 @@ _Por el momento_, **todas las contribuciones se realizan a través de pull reque
 
 ## 🚀 ¿Cómo puedo contribuir?
 
-Existen tres formas principales de aportar al proyecto:
+Existen tres formas principales de aportar al proyecto, aunque por regla general recomendamos leer el punto tres, ya que, ahí podrá aliviar dudas de como llevar el repositorio a su computadora:
 
 1. **📚 Subiendo apuntes** – Si tienes buenos apuntes y quieres compartirlos, esta es tu sección.
 2. **🎨 Diseñando banners** – Si te gusta el diseño y quieres aportar imágenes para las publicaciones.
@@ -76,7 +76,8 @@ content/
 │ │ ├── capitulo2.md
 ```
 
-🎨 ¡Quiero contribuir con banners y diseño!
+# 🎨 ¡Quiero contribuir con banners y diseño!
+
 Si te gusta el diseño gráfico y quieres aportar banners o imágenes para los apuntes, sigue estos pasos:
 
 1. Crea tu diseño respetando los tamaños usados en el proyecto.

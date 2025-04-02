@@ -2,7 +2,6 @@
 title: "Matrices - Clase 1"
 description: "Una colección de asignaturas"
 pubDate: "Marzo 30 2025"
-heroImage: "/blog-placeholder-3.jpg"
 construccion: true
 isMath: true
 ---

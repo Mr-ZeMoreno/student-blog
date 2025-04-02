@@ -1,19 +1,53 @@
 ---
 interface Props {
-  date: string | Date
+  pubDate: string | Date
+  updatedDate?: string | Date
+  small?: boolean
 }
 
-const { date } = Astro.props
+const { pubDate, updatedDate, small = false } = Astro.props
 
-const formattedDate = new Date(date)
+const formattedDate = new Date(pubDate)
 ---
 
-<time datetime={formattedDate.toISOString()}>
+<div class:list={['date', small ? 'small' : '']}>
+  <time datetime={formattedDate.toISOString()}>
+    {
+      formattedDate.toLocaleDateString('es-cl', {
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric',
+      })
+    }
+  </time>
   {
-    formattedDate.toLocaleDateString('es-cl', {
-      year: 'numeric',
-      month: 'short',
-      day: 'numeric',
-    })
+    updatedDate && (
+      <div class="last-updated-on">
+        Last updated on
+        <time datetime={formattedDate.toISOString()}>
+          {formattedDate.toLocaleDateString('es-cl', {
+            year: 'numeric',
+            month: 'short',
+            day: 'numeric',
+          })}
+        </time>
+      </div>
+    )
   }
-</time>
+</div>
+
+<style>
+  .date {
+    margin-bottom: 0.5em;
+    color: rgb(var(--gray));
+    font-size: 2rem;
+  }
+  .last-updated-on {
+    font-style: italic;
+  }
+  .small {
+    margin: 0;
+    color: rgb(var(--gray));
+    font-size: 1.4rem;
+  }
+</style>

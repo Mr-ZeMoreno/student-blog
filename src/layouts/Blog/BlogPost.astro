@@ -15,33 +15,16 @@ interface Props extends X {
   baseURL: string;
 }
 
-const {
-  title,
-  description,
-  pubDate,
-  updatedDate,
-  heroImage,
-  nav,
-  baseURL,
-  isMath,
-} = Astro.props;
+const { title, description, pubDate, updatedDate, nav, baseURL, isMath } =
+  Astro.props;
 
-const nextUrl = (
-  baseURL +
-  nav?.next
-    ?.replaceAll(".", "")
-    .replaceAll(",", "")
-    .replaceAll("!", "")
-    .replaceAll(" ", "-")
-).toLowerCase();
-const backUrl = (
-  baseURL +
-  nav?.back
-    ?.replaceAll(".", "")
-    .replaceAll(",", "")
-    .replaceAll("!", "")
-    .replaceAll(" ", "-")
-).toLowerCase();
+let { heroImage } = Astro.props;
+
+const cleanUrl = (url: string | undefined) =>
+  url?.replaceAll(/[.,!]/g, "").replaceAll(" ", "-").toLowerCase() ?? "";
+
+const nextUrl = baseURL + cleanUrl(nav?.next);
+const backUrl = baseURL + cleanUrl(nav?.back);
 ---
 
 <html lang="es">

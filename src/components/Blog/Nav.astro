@@ -1,0 +1,59 @@
+---
+interface Props {
+  nav?: {
+    next?: string
+    back?: string
+  }
+  coleccion: string
+  apunte?: string
+}
+
+const { nav, coleccion, apunte = '' } = Astro.props
+
+const cleanUrl = (url: string | undefined) =>
+  url?.replaceAll(/[.,!]/g, '').replaceAll(' ', '-').toLowerCase() ?? ''
+
+const baseURL = `/${coleccion}/${apunte}/`
+
+const nextUrl = baseURL + cleanUrl(nav?.next)
+const backUrl = baseURL + cleanUrl(nav?.back)
+---
+
+<nav>
+  {
+    nav?.back && (
+      <a id="back" href={backUrl}>
+        <span>{nav.back}</span>
+      </a>
+    )
+  }
+  {
+    nav?.next && (
+      <a id="next" href={nextUrl}>
+        <span>{nav.next}</span>
+      </a>
+    )
+  }
+</nav>
+
+<style>
+  a {
+    color: black;
+    font-weight: bold;
+    width: 100%;
+    display: flex;
+  }
+  nav {
+    display: grid;
+    grid-template-areas: 'back next';
+    grid-template-columns: 1fr 1fr;
+  }
+  #next {
+    grid-area: next;
+    justify-content: end;
+  }
+  #back {
+    grid-area: back;
+    justify-content: start;
+  }
+</style>

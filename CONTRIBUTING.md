@@ -32,7 +32,7 @@ Existen tres formas principales de aportar al proyecto, aunque por regla general
 
 El contenido del proyecto se organiza en **colecciones**, que agrupan los apuntes en grandes categorías. Actualmente, existen dos colecciones:
 
-- **📖 Libros** – Resúmenes y apuntes basados en libros académicos.
+- **📖 Biblioteca** – Resúmenes y apuntes basados en libros académicos.
 - **🏫 Asignaturas** – Apuntes organizados por materia universitaria.
 
 Cada asignatura o libro tiene su propia carpeta dentro de `content/`.
@@ -69,7 +69,7 @@ content/
 │ │ ├── derivadas.md
 │ │ ├── integrales.md
 │
-│── libros/
+│── Biblioteca/
 │ ├── algebra_lineal/
 │ │ ├── main.md (Resumen del libro)
 │ │ ├── capitulo1.md

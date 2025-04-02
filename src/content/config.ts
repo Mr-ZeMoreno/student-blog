@@ -1,6 +1,5 @@
 import { glob } from "astro/loaders";
 import { defineCollection, z } from "astro:content";
-import { string } from "astro:schema";
 
 const navSchema = z.object({
   next: z.string().optional(),
